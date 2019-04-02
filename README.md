@@ -1,4 +1,4 @@
 
 # OM.THREE
 
-> Three.hx extensions
+> Three.hx extensions/helpers/tools
