@@ -1,2 +1,5 @@
 doc/
 example/*/*.js*
+res/script/postprocessing
+res/script/shader
+_*
