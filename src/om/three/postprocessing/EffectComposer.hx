@@ -5,7 +5,7 @@ import three.Lib;
 import three.math.Vector2;
 import three.renderers.WebGLRenderer;
 import three.renderers.WebGLRenderTarget;
-//import om.three.render.pass.MaskPass;
+import om.three.postprocessing.MaskPass;
 import om.three.postprocessing.RenderPass;
 import om.three.postprocessing.ShaderPass;
 
@@ -48,7 +48,6 @@ class EffectComposer {
 
 		passes = [];
 
-		//copyPass = new ShaderPass( CopyShader );
 		copyPass = new CopyPass();
 
 		_previousFrameTime = Date.now().getTime();
@@ -68,20 +67,11 @@ class EffectComposer {
 
 	public function insertPass( pass : IPass, index : Int ) {
 		//TODO: passes.splice( index, 0, pass );
-		trace("insertPass");
+		//trace("insertPass");
 		passes.splice( index, 0 );
 	}
 
 	public function isLastEnabledPass( passIndex : Int ) : Bool {
-		/*
-		var i = passIndex+1;
-		while( i < passes.length ) {
-			if( passes[i].enabled )
-				return false;
-			i++;
-		}
-		return true;
-		*/
 		for( i in (passIndex+1)...passes.length )
 			if( passes[i].enabled )
 				return false;
@@ -94,51 +84,27 @@ class EffectComposer {
 		var currentRenderTarget = renderer.getRenderTarget();
 		var maskActive = false;
 		var pass : IPass;
-		//var i = 0;
 		var il = passes.length;
-		//trace(il);
-
 		for( i in 0...il ) {
 			pass = this.passes[i];
 			if( !pass.enabled ) continue;
 			pass.renderToScreen = ( this.renderToScreen && this.isLastEnabledPass( i ) );
 			pass.render( this.renderer, this.writeBuffer, this.readBuffer, delta, maskActive );
 			if( pass.needsSwap ) {
-				//TODO:
 				if( maskActive ) {
-					///...
-				}
-				this.swapBuffers();
-			}
-		}
-
-		/*
-		while( i < il ) {
-			pass = passes[i];
-			if( !pass.enabled ) continue;
-			pass.renderToScreen = (renderToScreen && isLastEnabledPass(i) );
-			pass.render( renderer, writeBuffer, readBuffer, delta, maskActive );
-			if( pass.needsSwap ) {
-				if( maskActive ) {
-					var context = renderer.context;
+					var context = this.renderer.context;
 					context.stencilFunc( RenderingContext.NOTEQUAL, 1, 0xffffffff );
 					copyPass.render( renderer, writeBuffer, readBuffer, delta );
 					context.stencilFunc( RenderingContext.EQUAL, 1, 0xffffffff );
 				}
-				swapBuffers();
+				this.swapBuffers();
 			}
-			/*
-			//TODO:
 			if( Std.is( pass, MaskPass ) ) {
 				maskActive = true;
-		//TODO:
-		//	} else if( Std.is( pass, ClearMaskPass ) ) {
-		//		maskActive = false;
+			} else if( Std.is( pass, ClearMaskPass ) ) {
+				maskActive = false;
 			}
-			* /
-			i++;
 		}
-		*/
 		this.renderer.setRenderTarget( currentRenderTarget );
 	}
 
