@@ -1,4 +1,4 @@
-package om.three.postprocessing;
+package om.three.render;
 
 import three.math.Vector2;
 import three.materials.ShaderMaterial;

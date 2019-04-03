@@ -1,13 +1,13 @@
-package om.three.postprocessing;
+package om.three.render;
 
 import js.html.webgl.RenderingContext;
 import three.Lib;
 import three.math.Vector2;
 import three.renderers.WebGLRenderer;
 import three.renderers.WebGLRenderTarget;
-import om.three.postprocessing.MaskPass;
-import om.three.postprocessing.RenderPass;
-import om.three.postprocessing.ShaderPass;
+import om.three.render.MaskPass;
+import om.three.render.RenderPass;
+import om.three.render.ShaderPass;
 
 class EffectComposer {
 

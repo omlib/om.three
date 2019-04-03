@@ -1,4 +1,4 @@
-package om.three.postprocessing;
+package om.three.render;
 
 import three.cameras.Camera;
 import three.materials.Material;

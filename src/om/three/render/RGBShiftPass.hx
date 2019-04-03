@@ -1,4 +1,4 @@
-package om.three.postprocessing;
+package om.three.render;
 
 import three.textures.Texture;
 
@@ -10,7 +10,7 @@ private typedef RGBShiftUniforms = {
 
 class RGBShiftPass extends ShaderPass<RGBShiftUniforms> {
 
-	static inline var FS = '
+	static final FS = '
 uniform sampler2D tDiffuse;
 uniform float amount;
 uniform float angle;

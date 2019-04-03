@@ -1,4 +1,6 @@
-package om.three.postprocessing;
+package om.three.render;
+
+import om.three.render.Shader;
 
 typedef CopyShaderUniforms = {
 	var tDiffuse   : { type : String, value : String };
@@ -7,14 +9,7 @@ typedef CopyShaderUniforms = {
 
 class CopyPass extends ShaderPass<CopyShaderUniforms> {
 	
-	public static var VS(default,null) = 'varying vec2 vUv;
-	void main() {
-		vUv = uv;
-		gl_Position = projectionMatrix * modelViewMatrix * vec4( position, 1.0 );
-
-	}';
-
-	public static var FS(default,null) = 'uniform float opacity;
+	public static final FS = 'uniform float opacity;
 uniform sampler2D tDiffuse;
 varying vec2 vUv;
 void main() {
@@ -24,8 +19,8 @@ void main() {
 
 	public function new() {
 		super( new Shader({
-			tDiffuse: { type : "t", value : null },
-			opacity: { type: "f", value : 1.0 }
-		}, VS, FS ) );
+			tDiffuse: { type : texture, value : null },
+			opacity: { type: float, value : 1.0 }
+		}, null, FS ) );
 	}
 }

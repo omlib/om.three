@@ -1,8 +1,7 @@
-package om.three.postprocessing;
+package om.three.render;
 
 import js.html.webgl.RenderingContext;
 import three.cameras.Camera;
-import three.cameras.OrthographicCamera;
 import three.math.Vector2;
 import three.renderers.WebGLRenderTarget;
 import three.renderers.WebGLRenderer;
@@ -72,7 +71,7 @@ class ClearMaskPass extends Pass {
 		needsSwap = false;
 	}
 
-	public override function render( renderer : WebGLRenderer, writeBuffer : WebGLRenderTarget, readBuffer : WebGLRenderTarget, delta : Float, ?maskActive : Bool ) {
+	public override inline function render( renderer : WebGLRenderer, writeBuffer : WebGLRenderTarget, readBuffer : WebGLRenderTarget, delta : Float, ?maskActive : Bool ) {
 		renderer.state.buffers.stencil.setTest( false );
 	}
 }

@@ -1,4 +1,4 @@
-package om.three.postprocessing;
+package om.three.render;
 
 import three.cameras.Camera;
 import three.cameras.OrthographicCamera;
@@ -12,6 +12,7 @@ import three.scenes.Scene;
 import three.scenes.Scene;
 import three.renderers.shaders.UniformsUtils;
 
+//TODO: @:autoBuild(om.three.macro.BuildShaderPass.properties())
 class ShaderPass<T> extends Pass {
 
 	public var textureID : String;
@@ -22,21 +23,20 @@ class ShaderPass<T> extends Pass {
     var scene : Scene;
 	var fsQuad : FullScreenQuad<T>;
 
-	public function new( shader : Shader<T>, ?textureID = "tDiffuse" ) {
+	public function new( shader : Shader<T>, textureID = "tDiffuse" ) {
 		super();
 		this.textureID = textureID;
 		//TODO: if ( shader instanceof THREE.ShaderMaterial ) {
-		this.uniforms = UniformsUtils.clone( shader.uniforms );
-		this.material = new ShaderMaterial( {
+		uniforms = UniformsUtils.clone( shader.uniforms );
+		material = new ShaderMaterial( {
             //TODO
             //defines: shader.defines || {},
             defines: {},
-            uniforms: this.uniforms,
+            uniforms: uniforms,
             vertexShader: shader.vertexShader,
             fragmentShader: shader.fragmentShader
         });
-
-		this.fsQuad = new FullScreenQuad( this.material );
+		fsQuad = new FullScreenQuad( material );
 	}
 
 	//@:keep
@@ -44,18 +44,18 @@ class ShaderPass<T> extends Pass {
 		if( untyped uniforms[ textureID ] != null ) {
 			untyped uniforms[textureID].value = readBuffer.texture;
 		}
-		this.fsQuad.material = this.material;
+		fsQuad.material = material;
 		if( renderToScreen ) {
 			renderer.setRenderTarget( null );
-			this.fsQuad.render( renderer );
+			fsQuad.render( renderer );
 		} else {
 			renderer.setRenderTarget( writeBuffer );
 			// TODO: Avoid using autoClear properties, see https://github.com/mrdoob/three.js/pull/15571#issuecomment-465669600
-			if ( this.clear ) renderer.clear( renderer.autoClearColor, renderer.autoClearDepth, renderer.autoClearStencil );
-			this.fsQuad.render( renderer );
+			if ( clear )
+				renderer.clear( renderer.autoClearColor, renderer.autoClearDepth, renderer.autoClearStencil );
+			fsQuad.render( renderer );
 		}
 	}
-
 	
 	@:keep
 	public override function setSize( width : Float, height : Float ) {

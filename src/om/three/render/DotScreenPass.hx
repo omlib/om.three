@@ -1,7 +1,8 @@
-package om.three.postprocessing;
+package om.three.render;
 
 import three.math.Vector2;
 import three.materials.ShaderMaterial;
+import om.three.render.Shader;
 
 typedef DotScreenUniforms = {
 	var tDiffuse: { type:String, value:String };
@@ -13,7 +14,7 @@ typedef DotScreenUniforms = {
 
 class DotScreenPass extends ShaderPass<DotScreenUniforms> {
 
-	static inline var FS = 'uniform vec2 center;
+	static final FS = 'uniform vec2 center;
 	uniform float angle;
 	uniform float scale;
 	uniform vec2 tSize;
@@ -54,11 +55,11 @@ class DotScreenPass extends ShaderPass<DotScreenUniforms> {
 	public function new( ?center : Vector2, angle = 1.57, scale = 1.0 ) {
 		if( center == null ) center = new Vector2( 0.5, 0.5 );
 		super( new Shader({
-			tDiffuse : { type: "t", value: null },
-			tSize :    { type: "v2", value: new Vector2( 256, 256 ) },
-			center:    { type: "v2", value: center },
-			angle:     { type: "f", value: angle },
-			scale:     { type: "f", value: scale }
+			tDiffuse : { type: texture, value: null },
+			tSize :    { type: vector2, value: new Vector2( 256, 256 ) },
+			center:    { type: vector2, value: center },
+			angle:     { type: float, value: angle },
+			scale:     { type: float, value: scale }
 		}, null, FS ) );
 	}
 
