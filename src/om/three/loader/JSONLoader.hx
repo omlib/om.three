@@ -1,7 +1,8 @@
-package om.three.loaders;
+package om.three.loader;
 
 import three.core.Geometry;
 import three.materials.Material;
+import three.loaders.LoadingManager;
 
 @:native("THREE.JSONLoader")
 extern class JSONLoader {
