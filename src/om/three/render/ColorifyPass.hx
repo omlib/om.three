@@ -21,9 +21,11 @@ void main() {
 	gl_FragColor = vec4( v * color, texel.w );
 }';
 
+	/*
 	public var color(get,set) : Color;
 	inline function get_color() : Color return uniforms.color.value;
 	inline function set_color(v:Color) : Color return uniforms.color.value = v;
+	*/
 
 	public function new( color : Int ) {
 		super( new Shader( {

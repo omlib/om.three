@@ -11,8 +11,9 @@ import three.renderers.WebGLRenderer;
 import three.scenes.Scene;
 import three.scenes.Scene;
 import three.renderers.shaders.UniformsUtils;
+import om.three.shader.Shader;
 
-//TODO: @:autoBuild(om.three.macro.BuildShaderPass.properties())
+@:autoBuild(om.three.macro.BuildShaderPass.build())
 class ShaderPass<T> extends Pass {
 
 	public var textureID : String;

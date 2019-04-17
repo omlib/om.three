@@ -1,11 +1,12 @@
 package om.three.render;
 
 import three.textures.Texture;
+import om.three.shader.Shader;
 
 private typedef BrightnessContrastShaderUniforms = {
-	tDiffuse:   { type:String, value:Texture },
-	brightness: { type:String, value:Float },
-	contrast:   { type:String, value:Float }
+	tDiffuse:   { type: String, value: String },
+	brightness: { type: String, value: Float },
+	contrast:   { type: String, value: Float },
 };
 
 class BrightnessContrastPass extends ShaderPass<BrightnessContrastShaderUniforms> {
@@ -27,6 +28,7 @@ void main() {
 	}
 }';
 
+	/*
 	public var brightness(get,set) : Float;
 	inline function get_brightness() : Float return uniforms.brightness.value;
 	inline function set_brightness(v:Float) : Float return uniforms.brightness.value = v;
@@ -34,6 +36,7 @@ void main() {
 	public var contrast(get,set) : Float;
 	inline function get_contrast() : Float return uniforms.contrast.value;
 	inline function set_contrast(v:Float) : Float return uniforms.contrast.value = v;
+	*/
 
 	public function new( brightness = 0.0, contrast = 0.0 ) {
 		super( new Shader( {

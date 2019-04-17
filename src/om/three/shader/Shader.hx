@@ -1,10 +1,11 @@
-package om.three.render;
+package om.three.shader;
 
 enum abstract UniformType(String) to String {
 	var color = "c";
 	var float = "f";
 	var texture = "t";
 	var vector2 = "v2";
+	var vector3 = "v3";
 	var vector4 = "v4";
 	//...
 }
@@ -17,9 +18,11 @@ void main() {
 	gl_Position = projectionMatrix * modelViewMatrix * vec4( position, 1.0 );
 }';
 
+	public var defines : Dynamic;
 	public var uniforms(default,null) : T;
 	public var vertexShader(default,null) : String;
 	public var fragmentShader(default,null) : String;
+	//blending
 
 	public function new( uniforms : T, ?vertexShader : String, fragmentShader : String ) {
 		this.uniforms = uniforms;

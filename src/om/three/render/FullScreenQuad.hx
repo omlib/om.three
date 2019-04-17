@@ -1,10 +1,10 @@
 package om.three.render;
 
-import three.renderers.WebGLRenderer;
 import three.cameras.OrthographicCamera;
 import three.geometries.PlaneBufferGeometry;
 import three.materials.ShaderMaterial;
 import three.objects.Mesh;
+import three.renderers.WebGLRenderer;
 
 class FullScreenQuad<T> {
 
@@ -20,7 +20,7 @@ class FullScreenQuad<T> {
 	var _mesh : Mesh;
 
 	public function new( material : ShaderMaterial<T> ) {
-		this._mesh = new Mesh( geometry, material );
+		_mesh = new Mesh( geometry, material );
 	}
 
 	public inline function render( renderer : WebGLRenderer ) {

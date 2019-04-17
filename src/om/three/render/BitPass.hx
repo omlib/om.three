@@ -3,13 +3,14 @@ package om.three.render;
 import three.textures.Texture;
 
 private typedef BitUniforms = {
-	tDiffuse:   { type:String, value: Texture },
-	bit: 	{ type:String, value:Int }
+	tDiffuse : { type : String, value : Texture },
+	bit : { type : String, value : Int }
 };
 
+//@fs()
 class BitPass extends ShaderPass<BitUniforms> {
-
-	static final FS = '
+	
+	static inline var FS = '
 uniform int bit;
 uniform sampler2D tDiffuse;
 varying vec2 vUv;
@@ -21,7 +22,7 @@ void main() {
 	float newB = floor(texel.b*n)/n;
 	gl_FragColor = vec4( vec3(newR,newG,newB), 1.0);
 }';
-
+	
 	//public var bit(get,set) : Int;
 	//inline function get_bit() : Int return uniforms.bit.value;
 	//inline function set_bit(v:Int) : Int return uniforms.bit.value = v;
