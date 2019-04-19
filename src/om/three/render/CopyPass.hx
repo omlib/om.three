@@ -1,12 +1,10 @@
 package om.three.render;
 
 import om.three.shader.CopyShader;
-import om.three.shader.Shader;
-import three.textures.Texture;
 
-class CopyPass extends ShaderPass<CopyShaderUniforms> {
+class CopyPass extends ShaderPass<CopyUniforms> {
 
-	public function new() {
-		super( new CopyShader() );
+	public function new( opacity = 1.0 ) {
+		super( new CopyShader( opacity ) );
 	}
 }

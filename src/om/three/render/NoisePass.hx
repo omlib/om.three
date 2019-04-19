@@ -2,6 +2,8 @@ package om.three.render;
 
 import three.textures.Texture;
 
+//TODO: remove, duplicate FilmPass
+
 private typedef NoiseUniforms = {
 	tDiffuse:   { type:String, value: Texture },
 	time: 	{ type:String, value:Float },
@@ -64,7 +66,7 @@ void main() {
     public var grayscale(get,set) : Bool;
     inline function get_grayscale() : Bool return uniforms.grayscale.value == 1;
     inline function set_grayscale(v:Bool) : Bool {
-		uniforms.grayscale.value = v?1:0;
+		uniforms.grayscale.value = v?0:1;
 		return v;
 	}
 
@@ -75,7 +77,7 @@ void main() {
 			nIntensity: { type:"f", value: nIntensity },
 			sIntensity: { type:"f", value: sIntensity },
 			sCount:     { type:"f", value: sCount },
-			grayscale:  { type:"i", value: grayscale?1:0 }
+			grayscale:  { type:"i", value: grayscale?0:1 }
 		},
 		null, FS) );
     }

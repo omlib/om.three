@@ -46,21 +46,31 @@ class RenderPass extends Pass {
 	}
 
 	public override function render( renderer : WebGLRenderer, writeBuffer : WebGLRenderTarget, readBuffer : WebGLRenderTarget, delta : Float, ?maskActive : Bool ) {
+		
+		var oldClearColor : Int = null;
+		var oldClearAlpha : Float = null;
 		var oldAutoClear = renderer.autoClear;
 		renderer.autoClear = false;
 		scene.overrideMaterial = overrideMaterial;
-		var oldClearColor : Int = null;
-		var oldClearAlpha : Float = null;
+		
 		if( clearColor != null ) {
 			oldClearColor = renderer.getClearColor().getHex();
 			oldClearAlpha = renderer.getClearAlpha();
 			renderer.setClearColor( clearColor, clearAlpha );
 		}
-		if( clearDepth ) renderer.clearDepth();
+		if( clearDepth )
+			renderer.clearDepth();
+		
 		renderer.setRenderTarget( renderToScreen ? null : readBuffer );
-		if( clear ) renderer.clear( renderer.autoClearColor, renderer.autoClearDepth, renderer.autoClearStencil );
+		
+		if( clear )
+			renderer.clear( renderer.autoClearColor, renderer.autoClearDepth, renderer.autoClearStencil );
+		
 		renderer.render( scene, camera );
-		if( clearColor != null ) renderer.setClearColor( oldClearColor, oldClearAlpha );
+
+		if( clearColor != null )
+			renderer.setClearColor( oldClearColor, oldClearAlpha );
+		
 		scene.overrideMaterial = null;
 		renderer.autoClear = oldAutoClear;
 	}

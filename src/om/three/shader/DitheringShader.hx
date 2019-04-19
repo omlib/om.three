@@ -1,24 +1,14 @@
-package om.three.render;
+package om.three.shader;
 
-import om.three.render.shader.DitheringShader;
 import three.textures.Texture;
 
-class DitheringPass extends ShaderPass<DitheringUniforms> {
-
-	public function new( scale = 2.0 ) {
-		super( cast new DitheringShader( scale ) );
-	}
-
-}
-
-/*
-private typedef DitheringUniforms = {
+typedef DitheringUniforms = {
 	tDiffuse: 	{ type:String, value:Texture },
 	scale: 	{ type:String, value:Float },
 	grayScale: 		{ type:String, value:Int }
 }
 
-class DitheringPass extends ShaderPass<DitheringUniforms> {
+class DitheringShader extends Shader<DitheringUniforms> {
 
 	static final FS = '
 	uniform sampler2D tDiffuse;
@@ -204,12 +194,11 @@ class DitheringPass extends ShaderPass<DitheringUniforms> {
 	}
 
 	public function new( scale = 2.0 ) {
-		super( new Shader( {
+		super( {
 			tDiffuse : { type: "t", value: null },
 			scale : { type: "f", value: scale },
 			grayScale :    { type: "i", value: 0 }
-		}, null, FS ) );
+		}, null, FS );
 	}
 
 }
-*/

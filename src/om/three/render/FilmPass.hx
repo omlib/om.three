@@ -2,6 +2,7 @@ package om.three.render;
 
 import three.math.Vector2;
 import three.materials.ShaderMaterial;
+import om.three.shader.Shader;
 
 typedef FilmUniforms = {
 	var tDiffuse : 	 { type : String, value : String };
@@ -14,13 +15,15 @@ typedef FilmUniforms = {
 
 class FilmPass extends ShaderPass<FilmUniforms> {
 
+	/*
 	static var VS = 'varying vec2 vUv;
 		void main() {
 			vUv = uv;
 			gl_Position = projectionMatrix * modelViewMatrix * vec4( position, 1.0 );
 		}';
+	*/
 
-	static var FS = '#include <common>
+	static final FS = '#include <common>
 		
 		// control parameter
 		uniform float time;
@@ -68,6 +71,7 @@ class FilmPass extends ShaderPass<FilmUniforms> {
 
 		}';
 
+	/*
 	public var time(get,set) : Float;
 	inline function get_time() : Float return uniforms.time.value;
 	inline function set_time(v:Float) : Float return uniforms.time.value = v;
@@ -90,6 +94,7 @@ class FilmPass extends ShaderPass<FilmUniforms> {
 		uniforms.grayscale.value = v ? 0 : 1;
 		return v;
 	}
+	*/
 
 	public function new( nIntensity = 0.5, sIntensity = 0.05, sCount = 4096.0, grayscale = false ) {
 		super( new Shader({
@@ -98,7 +103,7 @@ class FilmPass extends ShaderPass<FilmUniforms> {
 			nIntensity :  { type: "f", value: nIntensity },
 			sIntensity :    { type: "f", value: sIntensity },
 			sCount :     { type: "f", value: sCount },
-			grayscale :    { type: "f", value: grayscale ? 0 : 1 },
+			grayscale :    { type: "f", value: grayscale ? 1 : 0 },
 		}, null, FS ) );
 	}
 

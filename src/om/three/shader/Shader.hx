@@ -10,6 +10,7 @@ enum abstract UniformType(String) to String {
 	//...
 }
 
+@:autoBuild(om.three.macro.BuildShader.build())
 class Shader<T> {
 
 	public static final DEFAULT_VS = 'varying vec2 vUv;
