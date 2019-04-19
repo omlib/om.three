@@ -1,0 +1,13 @@
+--no-output
+-js _
+-lib om.three
+--macro include('om.three.control')
+--macro include('om.three.exporter')
+--macro include('om.three.light')
+--macro include('om.three.modifier')
+--macro include('om.three.loader')
+--macro include('om.three.shader')
+--macro include('om.three.texture')
+--macro include('om.three.util')
+-D doc-gen
+-xml doc/js.xml
