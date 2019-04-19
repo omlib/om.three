@@ -1,13 +1,17 @@
 package om.three.control;
 
 import js.html.Element;
+import three.core.Object3D;
 import three.core.EventDispatcher;
 import three.math.Vector3;
 
 @:native("THREE.MapControls")
 extern class MapControls extends EventDispatcher {
 
+	var object : Object3D;
+	
 	var enabled : Bool;
+	
 	var target : Vector3;
 
 	var minDistance : Float;
@@ -48,7 +52,7 @@ extern class MapControls extends EventDispatcher {
 	var position0 : Vector3;
 	var zoom0 : Vector3;
 
-	function new( object : Dynamic, domElement : Dynamic ) : Void;
+	function new( object : Dynamic, ?domElement : Element ) : Void;
 
 	function getPolarAngle() : Float;
 	function getAzimuthalAngle() : Float;

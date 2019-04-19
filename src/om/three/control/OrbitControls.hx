@@ -7,7 +7,10 @@ import three.math.Vector3;
 @:native("THREE.OrbitControls")
 extern class OrbitControls {
 
+	var object : Object3D;
+	
 	var enabled : Bool;
+
 	var target : Vector3;
 
 	var minDistance : Float;
@@ -48,13 +51,13 @@ extern class OrbitControls {
 	var position0 : Vector3;
 	var zoom0 : Float;
 
-	function new( object : Object3D, ?domElement : js.html.Element ) : Void;
+	function new( object : Object3D, ?domElement : Element ) : Void;
 
 	function getPolarAngle() : Float;
 	function getAzimuthalAngle() : Float;
 	function saveState() : Void;
 	function reset() : Void;
-	//function update() : Void;
+	function update() : Void;
 	function dispose() : Void;
 
 }
